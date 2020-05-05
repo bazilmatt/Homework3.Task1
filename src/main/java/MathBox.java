@@ -3,17 +3,16 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
-public class MathBox {
+public class MathBox extends ObjectBox<Number>{
 
 
     Set<Number> numberSet = new HashSet<>();
 
-    public MathBox(Number[] num) {
+    public MathBox(Number[] num)  {
         for (int i = 0; i < num.length; i++) {
             numberSet.add(num[i].doubleValue());
         }
         System.out.println("Элементы добавлены в коллекцию");
-
     }
 
     @Override
@@ -36,7 +35,7 @@ public class MathBox {
 
     public Number summator() {
         Integer sum = 0;
-        for (Number n : this.numberSet) {
+        for (Number n : numberSet) {
             sum += (Integer) n;
         }
         return sum;
@@ -44,7 +43,7 @@ public class MathBox {
 
     public void splitter(double split){
         Set<Number> rez = new HashSet<>();
-        Number[] a= new Number[this.numberSet.size()];
+        Number[] a= new Number[numberSet.size()];
         Iterator iter = numberSet.iterator();
         int i =0;
         while (iter.hasNext()){
@@ -53,16 +52,37 @@ public class MathBox {
             //numberSet.remove(a);
             iter.remove();
         }
-        this.numberSet.addAll(rez);
+        numberSet.addAll(rez);
     }
 
     public Set<Number> getNumberSet() {
         return numberSet;
     }
 
-    public void eraser(Integer del) {
-        if (this.numberSet.contains(del)) {
-            this.numberSet.remove(del);
+
+    @Override
+    public void addObject(Number[] array) {
+        super.addObject(array);
+    }
+
+    @Override
+    public void addObject(Number object) {
+        super.addObject(object);
+    }
+
+    @Override
+    public void deleteObject(Number object) {
+        super.deleteObject(object);
+    }
+
+    @Override
+    public void dump(ObjectBox box) {
+        super.dump(box);
+    }
+
+    public void deleteObject(Integer del) {
+        if (numberSet.contains(del)) {
+            numberSet.remove(del);
         } else {
             System.out.println("Нет такого элемента");
         }
